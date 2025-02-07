@@ -1,11 +1,11 @@
 const dotenv = require('dotenv') // dependency to help us declare environmental variables
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 process.on('uncaughtException', err => {
-    console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
-    console.log(err.name, err.message);
-    process.exit(1);
-});
+    console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...')
+    console.log(err.name, err.message)
+    process.exit(1)
+})
 
 dotenv.config({path: 'config.env'}) // environmental variables are here
 const app = require('./app') // imported express()
@@ -25,13 +25,13 @@ mongoose.connect(DB, { // connect to database before starting server
 })
 
 const server = app.listen(process.env.PORT, () => {
-    console.log(`App running on port ${process.env.PORT}...`);
-  });
+    console.log(`App running on port ${process.env.PORT}...`)
+  })
   
 process.on('unhandledRejection', err => {
-    console.log('UNHANDLED REJECTION! 💥 Shutting down...');
-    console.log(err.name, err.message);
+    console.log('UNHANDLED REJECTION! 💥 Shutting down...')
+    console.log(err.name, err.message)
     server.close(() => {
-        process.exit(1);
-    });
-});
+        process.exit(1)
+    })
+})
