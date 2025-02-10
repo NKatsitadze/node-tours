@@ -9,7 +9,7 @@ const sendEmail = async options => {
       user: process.env.EMAIL_USERNAME,
       pass: process.env.EMAIL_PASSWORD
     }
-  });
+  })
 
   // 2) Define the email options
   const mailOptions = {
@@ -17,7 +17,7 @@ const sendEmail = async options => {
     to: options.email,
     subject: options.subject,
     text: options.message
-  };
+  }
 
   // 3) Actually send the email
   await transporter.sendMail(mailOptions)
