@@ -73,4 +73,4 @@ module.exports = (err, req, res, next) => {
 
     sendErrorProd(error, res)
   }
-};
+}

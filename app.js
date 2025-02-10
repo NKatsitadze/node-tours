@@ -1,6 +1,5 @@
 const express = require('express')
-const morgan = require('morgan') // dependency which logs request method/url/status/
-                                // res[content-length]/response-time ms')
+const morgan = require('morgan')
 
 const helmet = require('helmet')
 const mongoSanitize = require('express-mongo-sanitize')
@@ -11,14 +10,12 @@ const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
 const app = express()
 
-const tourRouter = require('./routes/tourRoutes') // here are functions which we declared on specific url paths & http requests
-const userRouter = require('./routes/userRoutes') //
+const tourRouter = require('./routes/tourRoutes')
+const userRouter = require('./routes/userRoutes')
 
 app.use(helmet()) // set security http headers, recommended to use in the beginning
 
 if(process.env.NODE_ENV === 'development') app.use(morgan('dev')) 
-    // NODE_ENV is environmental variable that we declared in config.env or during script start,
-    // depending on this we can run script, for example node 'path of file' --NODE_ENV=development.
 
 const limiter = rateLimit({
     max: 100, // limits to 100 requests in 1 hour
@@ -28,7 +25,6 @@ const limiter = rateLimit({
 app.use('/api', limiter) // will affect every part of this app which starts at /api
 
 app.use(express.json( { limit: '10kb' } )) // built in middleware which binds request body (sent by client) to req.body
-// app.use(express.static(`${__dirname}/public`)) // files in public folder are not reachable for client
 
 // Data sanitization agains NoSQL query injection
 app.use(mongoSanitize())

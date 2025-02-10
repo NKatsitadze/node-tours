@@ -8,7 +8,7 @@ process.on('uncaughtException', err => {
 })
 
 dotenv.config({path: 'config.env'}) // environmental variables are here
-const app = require('./app') // imported express()
+const app = require('./app')
 
 const DB = process.env.DATABASE.replace( // database token from mongo
     '<PASSWORD>',
